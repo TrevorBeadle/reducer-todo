@@ -28,10 +28,21 @@ function App() {
         />
         <button>Submit</button>
       </form>
-
-      {state.map(todo => {
-        return <p>{todo.item}</p>;
-      })}
+      <ul>
+        {state.map(todo => {
+          return (
+            <li
+              className={todo.completed ? "completed" : ""}
+              key={todo.id}
+              onClick={() =>
+                dispatch({ type: "TOGGLE_COMPLETED", id: todo.id })
+              }
+            >
+              {todo.item}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

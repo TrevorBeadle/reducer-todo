@@ -17,6 +17,13 @@ export function reducer(state, action) {
           id: Date.now(),
         },
       ];
+
+    case "TOGGLE_COMPLETED":
+      return state.map(todo => {
+        return todo.id === action.id
+          ? { ...todo, completed: !todo.completed }
+          : todo;
+      });
     default:
       return state;
   }
