@@ -43,6 +43,9 @@ function App() {
           );
         })}
       </ul>
+      <button onClick={() => dispatch({ type: "REMOVE_TODO" })}>
+        Remove Completed
+      </button>
     </div>
   );
 }
