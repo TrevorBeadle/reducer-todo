@@ -1,5 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { initialState, reducer } from "./reducers/reducer";
+import TodoForm from "./Components/TodoForm";
+import Todo from "./Components/Todo";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -17,31 +19,18 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={onSubmit}>
-        <label htmlFor="todo">Add a Todo</label>
-        <input
-          type="text"
-          id="todo"
-          name="todo"
-          onChange={onChange}
-          value={inputValue}
-        />
-        <button>Submit</button>
-      </form>
+      <TodoForm
+        onChange={onChange}
+        onSubmit={onSubmit}
+        inputValue={inputValue}
+      />
       <ul>
-        {state.map(todo => {
-          return (
-            <li
-              className={todo.completed ? "completed" : ""}
-              key={todo.id}
-              onClick={() =>
-                dispatch({ type: "TOGGLE_COMPLETED", id: todo.id })
-              }
-            >
-              {todo.item}
-            </li>
-          );
-        })}
+        {state.map(todo => (
+          <Todo
+            todo={todo}
+            toggle={() => dispatch({ type: "TOGGLE_COMPLETED", id: todo.id })}
+          />
+        ))}
       </ul>
       <button onClick={() => dispatch({ type: "REMOVE_TODO" })}>
         Remove Completed
